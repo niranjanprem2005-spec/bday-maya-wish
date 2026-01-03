@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Maya ✨</title>
+    <!-- Imported Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Handlee&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8f9ff;
+            --letter-paper: #ffffff;
+            --hbd-blue: #7fb3d5; /* Soft Sky Blue */
+            --maya-purple: #8E44AD; /* Rich, Vibrant Purple */
+            --accent-lavender: #c3bef0; /* Light Lavender */
+            --text-main: #4a4e69;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- PAGE 1: ENTRANCE --- */
+        #page1 {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(142, 68, 173, 0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid #f0f0f0;
+        }
+
+        .welcome-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Font Styles */
+        .hbd-font {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            color: var(--hbd-blue);
+            letter-spacing: 2px;
+            font-size: 2.2rem;
+            display: block;
+        }
+
+        .maya-font {
+            font-family: 'Pacifico', cursive;
+            color: var(--maya-purple); /* Updated to Purple */
+            font-size: 2.8rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .bts-logo {
+            width: 60px;
+            margin-bottom: 20px;
+            fill: var(--maya-purple);
+            opacity: 0.8;
+        }
+
+        .open-btn {
+            background-color: var(--maya-purple);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            background-color: #763692;
+        }
+
+        /* --- PAGE 2: THE SCRAPBOOK --- */
+        #page2 {
+            display: none;
+            padding: 80px 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .letter-container {
+            background: var(--letter-paper);
+            max-width: 650px;
+            width: 100%;
+            padding: 80px 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 60px rgba(0,0,0,0.05);
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* Sticker Styling */
+        .sticker {
+            position: absolute;
+            background: white;
+            padding: 6px 6px 20px 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            z-index: 2;
+            width: 110px;
+            transition: transform 0.3s;
+        }
+
+        .sticker img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Positions */
+        .stk-eddie { top: -40px; left: -20px; transform: rotate(-12deg); }
+        .stk-gojo { top: -35px; right: -15px; transform: rotate(10deg); }
+        .stk-hinata { bottom: 20%; left: -45px; transform: rotate(-15deg); }
+        .stk-bts-group { top: 15%; right: -30px; transform: rotate(8deg); width: 95px; }
+        .stk-v { bottom: -25px; right: 30px; transform: rotate(-5deg); }
+        .stk-jk { bottom: -15px; left: 20px; transform: rotate(7deg); }
+        .stk-jimin { top: 45%; left: -35px; transform: rotate(-10deg); width: 100px; }
+
+        .wish-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+
+        .signature {
+            margin-top: 50px;
+            text-align: right;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.6rem;
+            color: var(--maya-purple);
+        }
+
+        /* Mobile View Adjustment */
+        @media (max-width: 768px) {
+            .sticker { width: 85px; }
+            .sticker img { height: 85px; }
+            .hbd-font { font-size: 1.8rem; }
+            .maya-font { font-size: 2.2rem; }
+            .letter-container { padding: 60px 20px; }
+        }
+
+        .fade-in {
+            display: flex !important;
+            animation: fadeInAnim 1s ease-in forwards;
+        }
+
+        @keyframes fadeInAnim {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1 -->
+    <div id="page1">
+        <div class="welcome-card" onclick="openLetter()">
+            <svg class="bts-logo" viewBox="0 0 100 100">
+                <path d="M20 10 L45 15 L45 85 L20 90 Z M55 15 L80 10 L80 90 L55 85 Z" />
+            </svg>
+            <span class="hbd-font">Happy Birthday</span>
+            <span class="maya-font">Maya</span>
+            <button class="open-btn">Open Your Letter</button>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="page2">
+        <div class="letter-container">
+            
+            <!-- STICKERS (Eddie, Gojo, Hinata + 4 BTS) -->
+            <div class="sticker stk-eddie">
+                <img src="https://i.pinimg.com/736x/01/f9/57/01f95701f01c23a72666a7b73812267d.jpg" alt="Eddie">
+            </div>
+            <div class="sticker stk-gojo">
+                <img src="https://i.pinimg.com/736x/0a/6d/2c/0a6d2c40336675034638708c0282d861.jpg" alt="Gojo">
+            </div>
+            <div class="sticker stk-hinata">
+                <img src="https://i.pinimg.com/736x/21/51/96/2151963283257521092ed7151e222923.jpg" alt="Hinata">
+            </div>
+            <div class="sticker stk-bts-group">
+                <img src="https://i.pinimg.com/736x/8e/31/6a/8e316a7f8490e1f7495146c6f6631899.jpg" alt="BTS Group">
+            </div>
+            <div class="sticker stk-v">
+                <img src="https://i.pinimg.com/736x/e8/3b/b1/e83bb1705e469d7249b6574f26034e34.jpg" alt="V">
+            </div>
+            <div class="sticker stk-jk">
+                <img src="https://i.pinimg.com/736x/91/92/05/91920557343e7471887e2292389d3d3d.jpg" alt="Jungkook">
+            </div>
+            <div class="sticker stk-jimin">
+                <img src="https://i.pinimg.com/736x/2c/5f/1b/2c5f1bb3124233291242274945371523.jpg" alt="Jimin">
+            </div>
+
+            <!-- THE LETTER -->
+            <div class="wish-text">
+                <h1 style="margin-top: 0; line-height: 1.2;">
+                    <span class="hbd-font" style="font-size: 1.8rem;">Happy Birthday</span>
+                    <span class="maya-font" style="font-size: 2.2rem;">Maya!</span>
+                </h1>
+                
+                <p>
+                    I wanted to put together a little something for you to celebrate your day. I know how much you love these characters and BTS, so I thought they should definitely be a part of your birthday surprise.
+                    <br><br>
+                    Getting to know you has been such a wonderful experience. You have an amazing personality and a way of making every conversation brighter. I really value the time we spend together and the person you are.
+                    <br><br>
+                    On your special day, I hope you're surrounded by all the things that make you smile. Whether you're listening to your favorite tracks, catching up on your shows, or just taking a well-deserved break, I hope every moment is filled with happiness.
+                    <br><br>
+                    You deserve the very best this year. Enjoy your day to the fullest!
+                </p>
+
+                <div class="signature">
+                    Best wishes, <br>
+                    Niranjan
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLetter() {
+            // Confetti burst with Purple and Blue
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#8E44AD', '#7fb3d5', '#c3bef0']
+            });
+
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').classList.add('fade-in');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
